@@ -23,11 +23,13 @@ def suntzu(a,m,b,n):
 
 def multisuntzu(a,m):
     """Apply Sun Tzu to multiple congruences."""
+    print("Beginning Sun Tzu's Algorithm.")
     while len(a) > 1:
         a[1],m[1] = suntzu(a[0],m[0],a[1],m[1]), m[0]*m[1]
         del a[0]
         del m[0]
 
+    print("Sun Tzu's Algorithm complete.")
     return a[0]
 
 def fpa(a,n,m):
@@ -147,11 +149,10 @@ def pohligHellman(g,h,p):
     
     #Sympy factorization was used. The function
     #primeFactor above works, but is slow.
-    print("Beginning Factorization of p =",p)
     primeFactorDict = factorint(p-1)
     primeList = list(primeFactorDict.keys()) #changes dictionary keys to list
     multList = list(primeFactorDict.values())#changes dictionary values to list
-    print("Factorization Complete:", p,"=",primeList, "with exponents", multList)
+    print("Factorization:", p,"=",primeList, "with exponents", multList)
     
     congList = []
     for i in range (len(primeList)):
@@ -166,7 +167,6 @@ def pohligHellman(g,h,p):
         else: #Shanks DLP solve if large prime #
             congList = congList + [shanks(gPrime,hPrime,p)]
         print("Solved! x =", congList[i], "mod",pPrime)
-    print("Beginning Chinese Remainder Theorem")
     return multisuntzu(congList,primeList)
 
 def kQCalculator(n):
@@ -211,10 +211,10 @@ def millerRabin(n,t):
             a = a*a%n
     return True
 
-print("g^x = h mod p")
+print("g^x = A mod p")
 p = int(input("p:"))
 g = int(input("g:"))
-h = int(input("h:"))
+h = int(input("A:"))
 
 choice = "y"
 if (not millerRabin(p,10)):
@@ -222,3 +222,4 @@ if (not millerRabin(p,10)):
 
 if choice[0].lower() == "y":
     print("x =",pohligHellman(g,h,p))
+    print("This is the private key a to be used for Elgamal.")
