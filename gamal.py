@@ -23,10 +23,11 @@ def listToChar(list):
     return result
 
 def inverse(a,p):
-    """Finds the inverse of a mod p."""
+    """Finds the inverse of a mod p using
+    the Extended Euclidean Algorithm."""
     u,g,x,y = 1,a,0,p
     while y != 0:
-        q,t = int(g/y), g%y
+        q,t = g//y, g%y
         s = u - q*x
         u,g = x,y
         x,y = s,t
