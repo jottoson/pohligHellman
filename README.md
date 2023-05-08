@@ -1,5 +1,5 @@
 # pohligHellman
-An implementation of the Pohlig-Hellman Algorithm for a Math class. Copy and paste the code into CoCalc to try it out!
+An implementation of the Pohlig-Hellman Algorithm for MATH 523 at Cal State University, San Marcos in Spring 2023. Copy and paste the code into CoCalc to try it out!
 
 The paper follows closely the work "An Introduction to Mathematical Cryptography" by Hoffstein, Pipher, and Silverman.The program implements the version of Pohlig-Hellman given in Theorem 3.3 of the included paper in order to solve the Discrete Logarithm Problem (DLP) g^x = h mod p. 
 
