@@ -1,11 +1,11 @@
 # pohligHellman
-An implementation of the Pohlig-Hellman Algorithm for a Math class. Copy and paste the code into CoCalc to try it out!
+An implementation of the Pohlig-Hellman Algorithm for MATH 523 at Cal State University, San Marcos in Spring 2023. Copy and paste the code from pohligHellman.py into CoCalc to try it out!
 
-The paper follows closely the work "An Introduction to Mathematical Cryptography" by Hoffstein, Pipher, and Silverman.The program implements the version of Pohlig-Hellman given in Theorem 3.3 of the included paper in order to solve the Discrete Logarithm Problem (DLP) g^x = h mod p. 
+The paper follows closely the work "An Introduction to Mathematical Cryptography" by Hoffstein, Pipher, and Silverman. The program implements the version of Pohlig-Hellman given in Theorem 3.3 of the included paper in order to solve the Discrete Logarithm Problem (DLP) g^x = h mod p. 
 
-Note that I used the sympy library in order to generate the prime factorization of p-1. I included a function that I made to generate the prime factorization, but it runs very slowly. Sympy is included in CoCalc, so the program should work as-is.
+Note that I used the sympy library in order to generate the prime factorization of p-1. I included a function that I made to generate the prime factorization, but it runs very slowly so I did not use it. Sympy is included in CoCalc, so the program should work as-is.
 
-Below are the public keys from the second codebreaking competition in class, along with the solution and corresponding plaintext. Try using the included program to watch all of our encrypted messages crumble before the power of Pohlig-Hellman. The messages were encrypted using the Elgamal Public Key Cryptosystem. If you are not familiar, then a short description is included at the bottom for reference.
+Below are the public keys from the second codebreaking competition in class, along with the solution and corresponding plaintext. Try using the included pohligHellman.py program to watch all of our encrypted messages crumble before the power of Pohlig-Hellman. The messages were encrypted using the Elgamal Public Key Cryptosystem. You can run the gamal.py program after you have obtained the secret key to decrypt each message. A short description of Elgamal is included at the bottom for reference.
 
 
 
@@ -116,5 +116,7 @@ Version of Elgamal Public Key Cryptosystem used for this competition:
 Alice chooses a prime p and a primitive root g mod p. Alice then chooses a secret number a to act as her private key and computes A = g^a mod p. Alice publishes her public key (p, g, A).
 
 Bob wants to send a message to Alice. He first chooses a random number k modulo p, which exists solely to encrypt a single message. Bob takes his plaintext message m, converts it to upper case, and write down the ASCII code for each character. For example, if m = "Hello", then Bob would write down 7269767679, since the ASCII code for "H" is 72, the ASCII code for "E" is 69, and so on. Bob then splits up this number into chunks of equal size, where each chunk must be smaller than p. He then computes two quantities for each chunk: c1 = g^k mod p; and c2 = m * A^k mod p. Each chunk becomes (c1, c2). Bob repeats this process for each chunk of his message, and when he is finished he sends all of the (c1, c2) ordered pairs to Alice.
+
+Eve sees ordered messages of the form (c1,c2) = (g^k, m * A^k) mod p. Even cannot decrypt the message m unless she knows Alice's private key a.
 
 Alice receives the encrypted messages as ordered pairs of the form (c1,c2). For each chunk, she computes x = (c_1^a)^-1 mod p. That is, she computes the inverse modulo p of (c_1)^a. She then computes m = x * c_2 mod p. This m value will be the chunk of Bob's message as ASCII values, which she can then write as English characters.
